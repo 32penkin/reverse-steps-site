@@ -1,0 +1,9 @@
+{
+  "name": "reverse-steps-site",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.cjs"
+  }
+}

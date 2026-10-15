@@ -1,0 +1,111 @@
+// Deutsch. Schlüssel wie in en.mjs.
+export default (cfg) => {
+  const after = cfg.quota.total - cfg.quota.withoutAccount;
+  const provider = cfg.aiProvider ? `${cfg.aiProvider}` : 'den KI-Anbieter, der in der App auf dem Einwilligungsbildschirm genannt wird';
+  const updated = new Date(`${cfg.lastUpdated}T12:00:00Z`).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' });
+  const mail = `<a href="mailto:${cfg.contactEmail}">${cfg.contactEmail}</a>`;
+  return {
+    nav: { label: 'Seiten', language: 'Sprache', home: 'Start', support: 'Hilfe', privacy: 'Datenschutz', deletion: 'Konto löschen' },
+    footer: {
+      disclaimer: 'Reverse Steps hält deine eigenen Schritte fest. Es ist keine Reparaturanleitung und prüft nicht, ob eine Reparatur sicher oder richtig ist.',
+      contact: 'Fragen und Feedback:',
+    },
+    home: {
+      title: 'Reverse Steps – Demontage fotografieren, in umgekehrter Reihenfolge zusammenbauen',
+      description: 'Mach vor jedem Schritt beim Zerlegen ein Foto. Wenn du alles wieder zusammenbaust, zeigt dir Reverse Steps dieselben Schritte in umgekehrter Reihenfolge.',
+      eyebrow: 'Für alle, denen schon mal eine Schraube übrig geblieben ist',
+      h1: 'In Fotos zerlegen. In der richtigen Reihenfolge zusammenbauen.',
+      lede: 'Mach vor jedem Schritt der Demontage ein Foto, füge die ausgebauten Teile und eine kurze Notiz hinzu. Beim Zusammenbau führt dich Reverse Steps durch deine eigenen Schritte zurück – vom letzten zum ersten, eine große Karte nach der anderen.',
+      iosBeta: 'iPhone-Beta (TestFlight)',
+      androidBeta: 'Android-Beta (Google Play)',
+      iosLive: 'Im App Store laden',
+      androidLive: 'Jetzt bei Google Play',
+      soon: 'bald',
+      storesNote: `Kostenlos, ohne Werbung. Deine erste Demontage braucht kein Konto; nach einer kostenlosen Anmeldung bekommst du ${after} weitere. Die Fotos bleiben auf deinem Handy.`,
+      illustrationAlt: 'Vier Fotos einer Demontage in der Reihenfolge 1 bis 4, danach dieselben Fotos in der Reihenfolge 4 bis 1 für den Zusammenbau.',
+      illustrationTop: 'Zerlegen',
+      illustrationArrow: 'Zusammenbau: 4 → 1',
+      stepsTitle: 'So funktioniert’s',
+      steps: [
+        { t: 'Erst das Foto, dann die Schraube', d: 'Leg ein Projekt an, fotografiere den Ausgangszustand und mach dann vor jeder Änderung ein Foto. Die Schritte werden automatisch nummeriert.' },
+        { t: 'Teile und Notiz hinzufügen', d: 'Fotografiere die ausgebauten Schrauben und Halterungen und halte per Text oder Sprache fest: „zwei kurze Schrauben, Kabelclip nach oben“.' },
+        { t: 'In umgekehrter Reihenfolge zusammenbauen', d: 'Wechsle zum Zusammenbau: Vollbildkarten vom letzten Schritt bis zum ersten. Hak jeden Schritt ab und vergleiche am Ende mit dem Ausgangsfoto.' },
+      ],
+      videoTitle: 'In 20 Sekunden erklärt',
+      videoSoon: 'Demovideo folgt bald',
+      videoNote: ' – eine echte Demontage, ein Häufchen Schrauben und die App, die durch sechs Schritte zurückführt.',
+      whyTitle: 'Warum nicht einfach die Fotogalerie?',
+      why: [
+        { t: 'Schritte statt Fotostapel', d: 'Jedes Projekt hat eigene, nummerierte Schritte, getrennt von deinen anderen Fotos.' },
+        { t: 'Teile gehören zu einem Schritt', d: 'Die ausgebauten Schrauben hängen an dem Schritt, aus dem sie stammen – zusammen mit deiner Notiz.' },
+        { t: 'Die Reihenfolge wird für dich umgedreht', d: 'Kein Zurückscrollen durch die Galerie und kein Raten, was zuerst kam.' },
+        { t: 'Standardmäßig privat', d: 'Fotos, Sprachnotizen und Notizen bleiben auf dem Gerät. Exportiere jederzeit eine ZIP-Datei oder speichere die Fotos in deiner Galerie.' },
+        { t: 'Optionale Hinweise zum Zusammenbau', d: 'Wenn du sie einschaltest, schlägt die App für jeden Schritt eine kurze Beschreibung auf Basis deiner eigenen Fotos vor. Die Hinweise können falsch sein, deshalb steht das Foto immer daneben.' },
+        { t: 'iPhone und Android', d: 'Kostenlos, ohne Werbung, auf Deutsch, Englisch, Polnisch, Russisch, Französisch und Spanisch.' },
+      ],
+      honestTitle: 'Was die App nicht kann',
+      honest: 'Reverse Steps hält fest, was du getan hast; es bringt dir keine Reparaturen bei und garantiert keinen korrekten Zusammenbau. Halte dich an die Anleitung des Herstellers, schalte das Gerät aus und trenne es vom Strom, und öffne keine Akkus, Gasgeräte oder Hochspannungsanlagen.',
+      more: 'Wo die Fotos gespeichert sind, Export, kostenlose Demontagen: siehe <a href="{support}">Hilfe</a>.',
+    },
+    support: {
+      title: 'Reverse Steps – Hilfe und FAQ',
+      description: 'Antworten zu Speicherort, Export, dem Löschen der App oder des Kontos und kostenlosen Demontagen in Reverse Steps.',
+      eyebrow: 'Hilfe',
+      h1: 'Hilfe und häufige Fragen',
+      lede: `Keine Antwort gefunden? Schreib an ${mail} – auf Englisch, Polnisch oder Russisch. In der App geht das auch über Einstellungen → Feedback senden.`,
+      faq: [
+        { q: 'Wo werden meine Fotos gespeichert?', a: `<p>Nur auf deinem Handy, im privaten Speicher der App. Sie werden weder auf unseren Server noch in eine Cloud hochgeladen. Die einzigen Ausnahmen sind ein Export, den du selbst startest, und die Hinweise zum Zusammenbau, falls du sie einschaltest (siehe unten).</p>` },
+        { q: 'Wie exportiere ich ein Projekt?', a: `<p>Öffne das Projekt → Exportieren. Du kannst eine ZIP-Datei mit allen Fotos und Notizen in der Reihenfolge der Schritte speichern (zum Öffnen am Computer oder zum Aufbewahren in deinen Dateien) oder die Fotos in einem Album deiner Galerie sichern.</p>` },
+        { q: 'Was passiert, wenn ich die App lösche?', a: `<p>Alle Projekte werden mit ihr gelöscht, weil sie nur auf dem Handy existieren. Exportiere vorher die Projekte, die du behalten möchtest. Es gibt keine Synchronisierung, daher ist auch ein neues Handy zunächst leer – Projekte überträgst du per Export.</p>` },
+        { q: 'Was passiert, wenn ich mein Konto lösche?', a: `<p>Deine Anmeldung und der Zähler der kostenlosen Demontagen werden auf unserem Server gelöscht. Die Projekte auf dem Handy bleiben, wo sie sind. Siehe <a href="../account-deletion/">Konto löschen</a>.</p>` },
+        { q: 'Wie viele kostenlose Demontagen habe ich?', a: `<p>Derzeit insgesamt ${cfg.quota.total}. Für die erste brauchst du kein Konto; nach einer kostenlosen Anmeldung (E-Mail, Google oder Apple) bekommst du ${after} weitere. Geprüft wird nur, wenn du eine neue Demontage startest – ein begonnenes Projekt wird nie gesperrt, auch nicht Zusammenbau, Export und Hinweise. Während der Beta können sich die Zahlen ändern.</p>` },
+        { q: 'Warum muss ich mich überhaupt anmelden?', a: `<p>Nur um die kostenlosen Demontagen zu zählen. Das Konto speichert deine E-Mail-Adresse (oder deine Apple-/Google-ID) und diesen Zähler – keine Fotos, Projektnamen oder Notizen.</p>` },
+        { q: 'Was sind Hinweise zum Zusammenbau und was wird gesendet?', a: `<p>Eine optionale Funktion. Vor der ersten Nutzung fragt die App nach deiner Einwilligung und nennt den KI-Anbieter. Danach werden verkleinerte Kopien deiner Schrittfotos und deine Notizen über unseren Server an ${provider} gesendet, um für jeden Schritt eine kurze Beschreibung zu erstellen. Wir speichern sie nicht. Bis zu ${cfg.aiDailyLimit} Anfragen pro Tag. Ohne Einwilligung oder ohne Internet funktioniert der Zusammenbau wie gewohnt mit deinen Fotos.</p>` },
+        { q: 'Ist es sicher, mit dieser App etwas zu reparieren?', a: `<p>Die App hält deine eigenen Schritte fest; sie beurteilt nicht, ob eine Reparatur sicher ist. Halte dich immer an die Anleitung des Herstellers, trenne das Gerät vom Strom und öffne keine Akkus, Gasgeräte oder Hochspannungsanlagen.</p>` },
+        { q: 'Wie schalte ich die anonyme Statistik aus?', a: `<p>Einstellungen → Anonyme Statistik. Ist sie ausgeschaltet, wird nichts gesendet. Was erfasst wird, steht in der <a href="../privacy/">Datenschutzerklärung</a>.</p>` },
+      ],
+      sections: [{ h: 'Kontakt', body: `<p>E-Mail: ${mail}. Bei Fehlern gib bitte dein Handymodell und die App-Version an (Einstellungen → Über die App). Wir antworten in der Regel innerhalb weniger Tage.</p>` }],
+    },
+    privacy: {
+      title: 'Reverse Steps – Datenschutzerklärung',
+      description: 'Was Reverse Steps erfasst: anonyme Statistik, Feedback, das du schreibst, ein Konto für kostenlose Demontagen und optionale Hinweise zum Zusammenbau. Die Fotos bleiben auf deinem Gerät.',
+      eyebrow: 'Datenschutzerklärung',
+      h1: 'Datenschutzerklärung',
+      updated: `Zuletzt aktualisiert: ${updated}`,
+      lede: 'Reverse Steps ist ein Demontage-Tagebuch: Deine Fotos, Sprachnotizen und Notizen bleiben auf deinem Gerät. Diese Erklärung beschreibt das Wenige, das es verlässt. Keine Werbung, kein Tracking über andere Apps oder Websites hinweg, keine Analyse- oder Werbe-SDKs von Dritten, und wir verkaufen keine personenbezogenen Daten.',
+      sections: [
+        { h: 'Wer wir sind', body: `<p>Reverse Steps wird von ${cfg.developer} (${cfg.developerCountry.de}) entwickelt, der Verantwortlicher im Sinne des Datenschutzrechts ist. Kontakt: ${mail}.</p>` },
+        { h: 'Was auf deinem Gerät bleibt', body: `<p>Projekte, Schrittfotos, Teilefotos, Sprachnotizen, Textnotizen, Projektnamen und -ziele werden nur im privaten Speicher der App auf deinem Handy gespeichert. Wir erhalten sie nicht. Sie verlassen das Gerät nur, wenn du selbst ein Projekt exportierst oder Fotos in deiner Galerie speicherst, oder – falls du sie einschaltest – für die Hinweise zum Zusammenbau (siehe unten). Wenn du die App löschst, werden sie gelöscht.</p>` },
+        { h: 'Anonyme Nutzungsstatistik', body: `<p>Um zu sehen, ob die App nützlich ist, sendet sie eine kleine Anzahl von Ereignissen, zum Beispiel „Projekt erstellt“, „Schritt aufgenommen“, „Zusammenbau gestartet“ oder „Export abgeschlossen“. Die Ereignisse enthalten nur Zahlen, Ja/Nein-Werte und feste Auswahlwerte (etwa die Anzahl der Schritte oder wie lange das Speichern eines Schritts gedauert hat) sowie eine zufällige Installations-ID, eine zufällige Sitzungs-ID, die Plattform (iOS oder Android), die App-Version und die Sprache der Oberfläche.</p>
+<p>Die Ereignisse enthalten niemals Fotos, Audio, Notizen, Projektnamen, Dateipfade, deine E-Mail-Adresse oder Konto-ID oder ein Gerätemodell. Sie werden in unserer eigenen Datenbank bei Supabase gespeichert und nicht mit deinem Konto verknüpft. Rohdaten der Ereignisse werden nach ${cfg.analyticsRawRetentionDays} Tagen gelöscht; danach bleiben nur Summen. Die Statistik ist standardmäßig eingeschaltet; du kannst sie jederzeit in den Einstellungen ausschalten, dann wird nichts gesendet. Rechtsgrundlage: unser berechtigtes Interesse an der Verbesserung der App (Art. 6 Abs. 1 lit. f DSGVO).</p>` },
+        { h: 'Feedback, das du sendest', body: `<p>Wenn du in der App Feedback sendest, speichern wir den von dir geschriebenen Text zusammen mit der zufälligen Installations-ID, der App-Version, der Plattform und der Sprache, um es zu lesen und Probleme zu beheben. Wenn du per E-Mail schreibst, erhalten wir deine E-Mail-Adresse und deine Nachricht. Bitte gib keine personenbezogenen Daten an, die wir nicht haben sollen.</p>` },
+        { h: 'Konto und kostenlose Demontagen', body: `<p>Deine erste Demontage funktioniert ohne Konto. Um sie zu zählen, sendet die App beim Start einer neuen Demontage die zufällige Installations-ID an unseren Server. Für weitere kostenlose Demontagen ist danach eine kostenlose Anmeldung nötig. Bei der Anmeldung per E-Mail verarbeiten wir deine E-Mail-Adresse; bei der Anmeldung mit Google oder Apple bestätigt der Anbieter deine Identität und übermittelt deine Konto-ID und E-Mail-Adresse (Apple kann eine private Weiterleitungsadresse angeben). Dein Google- oder Apple-Passwort erhalten wir nicht.</p>
+<p>Das Konto speichert nur: Konto-ID, E-Mail-Adresse oder Anbieter-ID und die Anzahl der begonnenen Demontagen (mit zufälligen Projektreferenzen). Keine Fotos, Namen oder Notizen. Wenn du dich mit Apple anmeldest, bewahrt unser Server das Apple-Refresh-Token nur auf, um den Zugriff zu widerrufen, wenn du das Konto löschst. Rechtsgrundlage: Erbringung des von dir angeforderten Dienstes (Art. 6 Abs. 1 lit. b DSGVO).</p>` },
+        { h: 'Hinweise zum Zusammenbau (optional)', body: `<p>Die Hinweise sind ausgeschaltet, bis du auf einem Einwilligungsbildschirm zustimmst, der den KI-Anbieter nennt. Mit deiner Einwilligung sendet die App, wenn du Hinweise anforderst, verkleinerte Kopien (etwa 1024 px) der Schritt- und Teilefotos des jeweiligen Projekts sowie deine Notizen – Sprachnotizen als Audio, falls der Anbieter das annimmt, sonst als auf deinem Handy transkribierter Text – über unsere Serverfunktion bei Supabase an ${provider}. Das Titelfoto wird nicht gesendet.</p>
+<p>Unser Server speichert die Fotos, Audiodaten und Notizen nicht und protokolliert sie nicht. Wir behalten nur technische Zähler (Anzahl der Fotos, Tokens, Kosten, Antwortzeit, Status), verknüpft mit der zufälligen Installations-ID, um ein Limit von ${cfg.aiDailyLimit} Anfragen pro Tag anzuwenden und die Kosten zu kontrollieren. Der Anbieter verarbeitet die Daten nach seinen API-Bedingungen ausschließlich, um die Hinweise zurückzugeben. Wir nutzen nur Anbieter, deren API-Bedingungen das Trainieren von Modellen mit diesen Daten nicht erlauben; der Anbieter kann sie für kurze Zeit zur Missbrauchserkennung aufbewahren. Der Anbieter kann Daten außerhalb der EU (zum Beispiel in den USA) auf Grundlage von Standardvertragsklauseln oder eines Angemessenheitsbeschlusses verarbeiten. Die Hinweise werden nur auf deinem Handy gespeichert. Rechtsgrundlage: deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du jederzeit in den Einstellungen widerrufen kannst.</p>` },
+        { h: 'Berechtigungen', body: `<ul><li><strong>Kamera</strong> – für die Schrittfotos. Die Fotos bleiben auf dem Gerät.</li><li><strong>Mikrofon</strong> – nur wenn du eine Sprachnotiz aufnimmst. Die Aufnahme bleibt auf dem Gerät.</li><li><strong>Fotos (nur hinzufügen)</strong> – nur wenn du ein Projekt in deiner Galerie speicherst.</li></ul><p>Kein Standort, keine Kontakte, keine Werbe-ID, keine App-Tracking-Transparency-Abfrage – wir tracken nicht.</p>` },
+        { h: 'Dienstleister', body: `<ul><li>Supabase – Datenbank, Anmeldung und Serverfunktionen.</li><li>Google und Apple – nur wenn du dich mit ihnen anmeldest, sowie die App-Stores, über die die App ausgeliefert wird.</li><li>${cfg.aiProvider ? cfg.aiProvider : 'Der in der App genannte KI-Anbieter'} – nur für Hinweise zum Zusammenbau, die du eingeschaltet hast.</li><li>GitHub Pages – hostet diese Website (setzt für uns keine Cookies; GitHub kann Besuche aus Sicherheitsgründen protokollieren).</li></ul>` },
+        { h: 'Speicherdauer und Löschung', body: `<p>Kontodaten werden aufbewahrt, solange das Konto besteht. Rohdaten der Nutzungsereignisse: ${cfg.analyticsRawRetentionDays} Tage. Feedback: so lange, wie es zur Bearbeitung nötig ist, höchstens 2 Jahre. Du kannst dein Konto in der App löschen (Einstellungen → Konto löschen) oder <a href="../account-deletion/">per E-Mail</a>. Beim Löschen des Kontos werden das Konto, seine Anmeldeverknüpfungen, der Demontage-Zähler und gespeicherte Apple-Tokens entfernt. Die anonyme Statistik ist nicht mit dem Konto verknüpft und daher nicht betroffen. Sicherungskopien bei unseren Dienstleistern können Daten für begrenzte Zeit enthalten.</p>` },
+        { h: 'Deine Rechte', body: `<p>Du kannst Auskunft über deine Daten, ihre Berichtigung oder Löschung, die Einschränkung der Verarbeitung, Widerspruch gegen die Verarbeitung und Datenübertragbarkeit verlangen, und du kannst eine Einwilligung jederzeit widerrufen. Schreib an ${mail}. Außerdem hast du das Recht, dich bei einer Aufsichtsbehörde zu beschweren – in Polen beim Präsidenten des Amtes für den Schutz personenbezogener Daten (UODO, polnische Datenschutzbehörde) oder bei der Aufsichtsbehörde in deinem Land.</p>` },
+        { h: 'Kinder', body: `<p>Die App richtet sich nicht an Kinder unter 13 Jahren, und wir erheben wissentlich keine Daten von ihnen. Wenn du glaubst, dass ein Kind ein Konto angelegt hat, melde dich bei uns – wir löschen es.</p>` },
+        { h: 'Änderungen', body: `<p>Wir aktualisieren diese Seite vor jeder Änderung daran, was die App erfasst (zum Beispiel wenn ein neuer KI-Anbieter genannt wird), und ändern das Datum oben.</p>` },
+      ],
+    },
+    deletion: {
+      title: 'Reverse Steps – Konto löschen',
+      description: 'Wie du dein Reverse-Steps-Konto in der App oder per E-Mail löschst und welche Daten gelöscht werden.',
+      eyebrow: 'Kontolöschung',
+      h1: 'Konto löschen',
+      lede: 'Du kannst dein Konto in der App löschen – oder per E-Mail, wenn du die App nicht mehr hast oder dich nicht anmelden kannst.',
+      button: 'Löschanfrage per E-Mail senden',
+      mailSubject: 'Reverse Steps – Bitte um Löschung des Kontos',
+      mailBody: 'Hallo,\n\nich bitte um Löschung meines Reverse-Steps-Kontos und der damit verknüpften Daten.\n\nE-Mail-Adresse meines Kontos (oder „Mit Apple/Google angemeldet“): \n\nDanke.',
+      sections: [
+        { h: 'In der App', body: `<ol><li>Öffne Reverse Steps und melde dich an.</li><li>Geh zu den Einstellungen.</li><li>Tippe auf Konto löschen und bestätige.</li></ol>` },
+        { h: 'Per E-Mail, ohne die App', body: `<ol><li>Schreib an <a href="mailto:${cfg.contactEmail}?subject=Reverse%20Steps%20%E2%80%93%20Bitte%20um%20L%C3%B6schung%20des%20Kontos">${cfg.contactEmail}</a> von der E-Mail-Adresse deines Kontos (die Schaltfläche oben bereitet die Nachricht vor).</li><li>Wenn du dich mit Apple angemeldet und deine E-Mail-Adresse verborgen hast, sag uns das – wir finden das Konto gemeinsam mit dir.</li><li>Wir bestätigen per E-Mail, dass das Konto dir gehört, und löschen es innerhalb von 30 Tagen, meist deutlich schneller.</li></ol>` },
+        { h: 'Was gelöscht wird', body: `<ul><li>Das Konto und seine Anmeldung (E-Mail-, Google- oder Apple-Verknüpfung).</li><li>Der Zähler der kostenlosen Demontagen und die Projektreferenzen.</li><li>Gespeicherte Sign in with Apple-Tokens, nachdem der Zugriff bei Apple widerrufen wurde.</li></ul>` },
+        { h: 'Was nicht betroffen ist', body: `<p>Projekte und Fotos auf deinem Handy – sie waren nie auf unserem Server; lösche sie in der App oder indem du die App löschst. Die anonyme Statistik – sie ist nicht mit dem Konto verknüpft und wird planmäßig gelöscht. Ein Nachweis, dass die Löschung beantragt und durchgeführt wurde (E-Mail-Adresse und Datumsangaben), wird als Beleg aufbewahrt. Sicherungskopien der Dienstleister können Daten für begrenzte Zeit enthalten.</p>` },
+      ],
+    },
+  };
+};
