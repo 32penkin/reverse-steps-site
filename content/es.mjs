@@ -78,19 +78,19 @@ export default (cfg) => {
         },
         {
           q: '¿Qué pasa si elimino mi cuenta?',
-          a: `<p>Eliminamos de nuestro servidor tu inicio de sesión y el contador de desmontajes gratuitos. Los proyectos del teléfono se quedan donde están. Consulta <a href="../account-deletion/">Eliminar cuenta</a>.</p>`,
+          a: `<p>Eliminamos de nuestro servidor tu cuenta, tu dirección de email y el ID de tu proveedor de inicio de sesión. Se conserva un recuento anónimo de los desmontajes empezados en tu dispositivo (sin vínculo contigo), para que una cuenta nueva no reinicie el límite gratuito. Los proyectos del teléfono se quedan donde están. Consulta <a href="../account-deletion/">Eliminar cuenta</a>.</p>`,
         },
         {
           q: '¿Cuántos desmontajes gratuitos tengo?',
-          a: `<p>Por ahora, ${cfg.quota.total} en total. El primero no necesita cuenta; al iniciar sesión gratis (con email, Google o Apple) tienes ${after} más. La comprobación se hace solo al empezar un desmontaje nuevo: un proyecto ya empezado nunca se bloquea, incluido el montaje, la exportación y las sugerencias. Las cifras pueden cambiar durante la beta.</p>`,
+          a: `<p>Por ahora, ${cfg.quota.total} en total. El primero no necesita cuenta; al iniciar sesión gratis tienes ${after} más. Puedes iniciar sesión con email (un código de un solo uso y un enlace, sin contraseña), con Google o con Apple. La comprobación se hace solo al empezar un desmontaje nuevo: un proyecto ya empezado nunca se bloquea, incluido el montaje, la exportación y las sugerencias. Las cifras pueden cambiar durante la beta.</p>`,
         },
         {
           q: '¿Por qué tengo que iniciar sesión?',
-          a: `<p>Solo para llevar la cuenta de los desmontajes gratuitos. La cuenta guarda tu email (o tu ID de Apple/Google) y ese contador; nada de fotos, nombres de proyectos ni notas.</p>`,
+          a: `<p>Solo para llevar la cuenta de los desmontajes gratuitos. La cuenta guarda tu dirección de email (con Apple puede ser una dirección de reenvío privada) y el ID de usuario de tu proveedor de inicio de sesión. Los desmontajes empezados se cuentan con un ID aleatorio de proyecto y un ID aleatorio de instalación; nada de fotos, nombres de proyectos, notas ni audio.</p>`,
         },
         {
           q: '¿Qué son las sugerencias de montaje y qué se envía?',
-          a: `<p>Es una función opcional. Antes del primer uso, la app te pide consentimiento e indica el nombre del proveedor de IA. Después, copias reducidas de las fotos de tus pasos y tus notas se envían a través de nuestro servidor para que ${provider} escriba un breve texto para cada paso. No las guardamos. Hasta ${cfg.aiDailyLimit} solicitudes de sugerencias al día. Sin consentimiento o sin internet, el montaje funciona con tus fotos como siempre.</p>`,
+          a: `<p>Es una función opcional y está desactivada hasta que la activas. Antes del primer uso, la app te pide consentimiento e indica el nombre del proveedor de IA. Después, copias reducidas de las fotos de tus pasos y piezas (sin datos de ubicación) y tus notas de texto y de voz se envían a través de nuestro servidor a ${provider}, solo para escribir un breve texto para cada paso. No las guardamos y el proveedor no las usa para entrenar modelos. El nombre del proyecto, la foto de portada «antes» y tu cuenta no se envían. Hasta ${cfg.aiDailyLimit} solicitudes de sugerencias al día. Puedes desactivar las sugerencias en Ajustes o para un solo proyecto. Sin consentimiento o sin internet, el montaje funciona con tus fotos como siempre.</p>`,
         },
         {
           q: '¿Es seguro reparar cosas con esta app?',
@@ -136,13 +136,13 @@ export default (cfg) => {
         },
         {
           h: 'Cuenta y desmontajes gratuitos',
-          body: `<p>Tu primer desmontaje funciona sin cuenta. Para contarlo, la app envía el ID aleatorio de instalación a nuestro servidor cuando empiezas un desmontaje nuevo. Después, para más desmontajes gratuitos hace falta iniciar sesión gratis. Si inicias sesión con email, tratamos tu dirección de email; si lo haces con Google o Apple, el proveedor confirma tu identidad y nos comparte el ID de tu cuenta y tu email (Apple puede darnos una dirección de reenvío privada). No recibimos tu contraseña de Google ni de Apple.</p>
-<p>La cuenta guarda solo: el ID de cuenta, el email o el ID del proveedor y el número de desmontajes iniciados (con referencias aleatorias a los proyectos). Nada de fotos, nombres ni notas. Si inicias sesión con Apple, nuestro servidor conserva el token de actualización de Apple únicamente para revocar el acceso cuando elimines la cuenta. Base jurídica: la prestación del servicio que solicitaste (art. 6.1.b del RGPD).</p>`,
+          body: `<p>Tu primer desmontaje funciona sin cuenta. Para contarlo, la app envía a nuestro servidor un ID aleatorio de instalación y un ID aleatorio de proyecto cuando empiezas un desmontaje nuevo. Para empezar más desmontajes gratuitos, inicias sesión gratis con email, Google o Apple. El inicio de sesión con email usa un código de un solo uso y un enlace, sin contraseña; los emails de inicio de sesión se envían a través de Gmail SMTP (Google). Si inicias sesión con Google o Apple, el proveedor confirma tu identidad; no recibimos tu contraseña de Google ni de Apple.</p>
+<p>Solo guardamos: tu dirección de email (con Apple puede ser una dirección de reenvío privada) y el ID de usuario de tu proveedor de inicio de sesión, que usamos solo para gestionar tu cuenta y contar tus desmontajes gratuitos; y, por cada proyecto que empiezas, un ID aleatorio de proyecto y un ID aleatorio de instalación. Nunca el nombre del proyecto, fotos, notas ni audio. Si inicias sesión con Apple, guardamos el token de actualización de Apple solo para revocarlo cuando elimines la cuenta. Estos datos se almacenan en Supabase, que los trata por cuenta nuestra (encargado del tratamiento). Base jurídica: la prestación del servicio que has solicitado (art. 6.1.b del RGPD).</p>`,
         },
         {
           h: 'Sugerencias de montaje (opcional)',
-          body: `<p>Las sugerencias están desactivadas hasta que aceptas una pantalla de consentimiento que indica el nombre del proveedor de IA. Con tu consentimiento, cuando pides sugerencias, la app envía copias reducidas (unos 1024 px) de las fotos de pasos y piezas de ese proyecto y tus notas (las notas de voz como audio si el proveedor lo admite y, si no, como texto transcrito en tu teléfono) a través de nuestra función de servidor en Supabase, para que las procese ${provider}. La foto de portada no se envía.</p>
-<p>Nuestro servidor no guarda las fotos, el audio ni las notas, y no los registra en logs. Solo conservamos contadores técnicos (número de fotos, tokens, coste, tiempo de respuesta, estado) vinculados al ID aleatorio de instalación, para aplicar un límite de ${cfg.aiDailyLimit} solicitudes al día y controlar los costes. El proveedor trata los datos según las condiciones de su API, únicamente para devolver las sugerencias. Solo usamos proveedores cuyas condiciones de API no permiten entrenar modelos con estos datos; el proveedor puede conservarlos durante un breve periodo para detectar abusos. El proveedor puede tratar datos fuera de la UE (por ejemplo, en Estados Unidos) al amparo de cláusulas contractuales tipo o de una decisión de adecuación. Las sugerencias se guardan solo en tu teléfono. Base jurídica: tu consentimiento (art. 6.1.a del RGPD), que puedes retirar en cualquier momento en Ajustes.</p>`,
+          body: `<p>Las sugerencias están desactivadas hasta que las activas y aceptas una pantalla de consentimiento que indica el nombre del proveedor de IA. Con tu consentimiento, cuando se escriben las sugerencias de un proyecto, la app envía copias reducidas (unos 1024 px, sin ubicación ni otros datos EXIF) de las fotos de pasos y piezas de ese proyecto y tus notas de texto y de voz (las notas de voz como audio si el proveedor admite audio y, si no, solo las notas de texto) a través de nuestra función de servidor en Supabase a ${provider}, solo para escribir las sugerencias. El nombre del proyecto, la foto de portada «antes» y tu cuenta no se envían.</p>
+<p>Nuestro servidor no guarda las fotos, el audio ni las notas y no los registra en los logs. Solo llevamos un registro técnico —el ID aleatorio de instalación, el número de solicitudes y de fotos, los tokens, el coste, el tiempo de respuesta y el estado— para aplicar un límite de ${cfg.aiDailyLimit} solicitudes al día y controlar los costes; se conserva hasta 400 días. El proveedor trata los datos según las condiciones de su API de pago, solo para devolver las sugerencias, y no los usa para entrenar modelos; puede conservarlos durante un breve periodo para detectar abusos. El proveedor puede tratar datos fuera de la UE (por ejemplo, en Estados Unidos) con base en cláusulas contractuales tipo o en una decisión de adecuación. Las sugerencias se guardan solo en tu teléfono. Base jurídica: tu consentimiento (art. 6.1.a del RGPD). Puedes retirarlo en cualquier momento desactivando las sugerencias en Ajustes; también puedes desactivarlas para un solo proyecto.</p>`,
         },
         {
           h: 'Permisos',
@@ -150,11 +150,11 @@ export default (cfg) => {
         },
         {
           h: 'Proveedores de servicios',
-          body: `<ul><li>Supabase: base de datos, inicio de sesión y funciones de servidor.</li><li>Google y Apple: solo si decides iniciar sesión con ellos, y las tiendas de apps que distribuyen la app.</li><li>${cfg.aiProvider ? cfg.aiProvider : 'El proveedor de IA indicado en la app'}: solo para las sugerencias de montaje que hayas activado.</li><li>GitHub Pages: aloja este sitio web (no instala cookies por nuestra cuenta; GitHub puede registrar las visitas por motivos de seguridad).</li></ul>`,
+          body: `<ul><li>Supabase: base de datos, inicio de sesión y funciones de servidor; trata los datos por cuenta nuestra (encargado del tratamiento).</li><li>Google: envía los emails de inicio de sesión (Gmail SMTP) y, solo si lo eliges, el inicio de sesión con Google.</li><li>Apple: solo si eliges iniciar sesión con Apple.</li><li>Las tiendas de apps que distribuyen la app.</li><li>${cfg.aiProvider ? cfg.aiProvider : 'El proveedor de IA indicado en la app'}: solo para las sugerencias de montaje que hayas activado.</li><li>GitHub Pages: aloja este sitio web (no instala cookies por nuestra cuenta; GitHub puede registrar las visitas por motivos de seguridad).</li></ul>`,
         },
         {
           h: 'Conservación y eliminación',
-          body: `<p>Los datos de la cuenta se conservan mientras exista la cuenta. Eventos de uso sin procesar: ${cfg.analyticsRawRetentionDays} días. Comentarios: el tiempo necesario para atenderlos, como máximo 2 años. Puedes eliminar tu cuenta en la app (Ajustes → Eliminar cuenta) o <a href="../account-deletion/">por email</a>. Al eliminar la cuenta se borran la cuenta, sus vínculos de inicio de sesión, el contador de desmontajes y los tokens de Apple guardados. Las estadísticas anónimas no están vinculadas a la cuenta, así que no se ven afectadas. Las copias de seguridad de nuestros proveedores pueden conservar datos durante un tiempo limitado.</p>`,
+          body: `<p>Los datos de la cuenta se conservan mientras exista la cuenta. Eventos de uso sin procesar: ${cfg.analyticsRawRetentionDays} días. Registro técnico de las sugerencias de montaje: hasta 400 días. Comentarios: el tiempo necesario para atenderlos, como máximo 2 años. Puedes eliminar tu cuenta en la app (Ajustes → Cuenta → Eliminar cuenta) o <a href="../account-deletion/">por email</a>. Al eliminar la cuenta se borran la cuenta, tu dirección de email, el ID del proveedor de inicio de sesión y el token de Apple guardado, después de revocar el acceso en Apple. Se conserva un recuento anónimo de los desmontajes empezados en el dispositivo (el ID aleatorio de instalación e IDs aleatorios de proyecto, sin vínculo contigo), para que el límite gratuito no pueda reiniciarse creando una cuenta nueva. Las estadísticas anónimas no están vinculadas a la cuenta, así que no se ven afectadas. Las copias de seguridad de nuestros proveedores pueden conservar datos durante un tiempo limitado.</p>`,
         },
         {
           h: 'Tus derechos',
@@ -175,26 +175,26 @@ export default (cfg) => {
       description: 'Cómo eliminar tu cuenta de Reverse Steps desde la app o por email, y qué datos se eliminan.',
       eyebrow: 'Eliminación de la cuenta',
       h1: 'Eliminar tu cuenta',
-      lede: 'Puedes eliminar tu cuenta desde la app, o por email si ya no tienes la app o no puedes iniciar sesión.',
+      lede: 'Tu cuenta solo guarda tu dirección de email y el ID de tu proveedor de inicio de sesión (email, Google o Apple). Las fotos, las notas y los nombres de proyectos nunca forman parte de ella. Puedes eliminar la cuenta desde la app, o por email si ya no tienes la app o no puedes iniciar sesión.',
       button: 'Enviar solicitud de eliminación por email',
-      mailSubject: 'Solicitud de eliminación de cuenta de Reverse Steps',
+      mailSubject: 'Delete my account',
       mailBody: 'Hola:\n\nPor favor, eliminen mi cuenta de Reverse Steps y los datos vinculados a ella.\n\nEl email de mi cuenta (o "Sign in with Apple/Google"): \n\nGracias.',
       sections: [
         {
           h: 'Desde la app',
-          body: `<ol><li>Abre Reverse Steps e inicia sesión.</li><li>Ve a Ajustes.</li><li>Toca Eliminar cuenta y confirma.</li></ol>`,
+          body: `<ol><li>Abre Reverse Steps e inicia sesión.</li><li>Ve a Ajustes → Cuenta.</li><li>Toca Eliminar cuenta y confirma. Si iniciaste sesión con Apple, puede que Apple te pida confirmarlo una vez más.</li></ol><p>La cuenta se elimina de inmediato y revocamos el acceso de Sign in with Apple.</p>`,
         },
         {
           h: 'Por email, sin la app',
-          body: `<ol><li>Escribe a <a href="mailto:${cfg.contactEmail}?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta%20de%20Reverse%20Steps">${cfg.contactEmail}</a> desde la dirección de email de tu cuenta (el botón de arriba prepara el mensaje).</li><li>Si iniciaste sesión con Apple y ocultaste tu email, indícalo: encontraremos la cuenta contigo.</li><li>Te confirmamos por email que la cuenta es tuya y la eliminamos en un plazo de 30 días, normalmente mucho antes.</li></ol>`,
+          body: `<ol><li>Escribe a <a href="mailto:${cfg.contactEmail}?subject=Delete%20my%20account">${cfg.contactEmail}</a> desde la dirección de email de tu cuenta con el asunto «Delete my account» (el botón de arriba prepara el mensaje).</li><li>Si iniciaste sesión con Apple y ocultaste tu email, indícalo: encontraremos la cuenta contigo.</li><li>Eliminamos la cuenta en un plazo de 30 días y te respondemos cuando esté hecho.</li></ol>`,
         },
         {
           h: 'Qué se elimina',
-          body: `<ul><li>La cuenta y su inicio de sesión (email, vínculo con Google o Apple).</li><li>El contador de desmontajes gratuitos y las referencias a los proyectos.</li><li>Los tokens de Sign in with Apple guardados, después de revocar el acceso en Apple.</li></ul>`,
+          body: `<ul><li>Tu cuenta.</li><li>Tu dirección de email.</li><li>El ID de usuario de tu proveedor de inicio de sesión (email, Google o Apple).</li><li>El token de Sign in with Apple guardado, después de revocar el acceso en Apple.</li></ul>`,
         },
         {
-          h: 'Qué no se ve afectado',
-          body: `<p>Los proyectos y fotos de tu teléfono: nunca estuvieron en nuestro servidor; elimínalos en la app o eliminando la app. Las estadísticas anónimas: no están vinculadas a la cuenta y se eliminan según el calendario previsto. Conservamos como prueba un registro de que la eliminación se solicitó y se realizó (email y fechas). Las copias de seguridad de los proveedores pueden conservar datos durante un tiempo limitado.</p>`,
+          h: 'Qué se conserva',
+          body: `<ul><li>Un recuento anónimo de los desmontajes empezados en tu dispositivo —un ID aleatorio de instalación e IDs aleatorios de proyecto, sin vínculo contigo—, para que el límite gratuito no pueda reiniciarse creando una cuenta nueva.</li><li>Las estadísticas de uso anónimas: no están vinculadas a la cuenta y se conservan ${cfg.analyticsRawRetentionDays} días.</li><li>Tus proyectos y fotos: nunca estuvieron en nuestro servidor y se quedan en tu teléfono hasta que los elimines en la app o la desinstales.</li></ul><p>Las copias de seguridad de los proveedores pueden conservar datos durante un tiempo limitado.</p>`,
         },
       ],
     },
