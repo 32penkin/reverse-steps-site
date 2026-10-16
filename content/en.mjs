@@ -79,7 +79,7 @@ export default (cfg) => {
         },
         {
           q: 'What happens if I delete my account?',
-          a: `<p>Your account, email address and sign-in provider ID are deleted on our server. An anonymous count of teardowns started on your device stays (with no link to you), so a new account does not reset the free limit. Projects on the phone stay where they are. See <a href="../account-deletion/">Delete account</a>.</p>`,
+          a: `<p>Your account, email address and sign-in provider ID are deleted on our server. An anonymous count of teardowns started on your device stays, with the link to your account removed, so a new account does not reset the free limit. Projects on the phone stay where they are. See <a href="../account-deletion/">Delete account</a>.</p>`,
         },
         {
           q: 'How many free teardowns do I get?',
@@ -87,11 +87,11 @@ export default (cfg) => {
         },
         {
           q: 'Why do I need to sign in at all?',
-          a: `<p>Only to keep count of free teardowns. The account stores your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID. Started teardowns are counted with a random project ID and a random installation ID — no photos, project names, notes or audio.</p>`,
+          a: `<p>Only to keep count of free teardowns. The account stores your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID. Started teardowns are counted with a random project ID, a random installation ID and, once you are signed in, your account — no photos, project names, notes or audio.</p>`,
         },
         {
           q: 'What are reassembly hints and what is sent?',
-          a: `<p>An optional feature that stays off until you turn it on. Before the first use the app asks for your consent and names the AI provider. Then reduced copies of your step and parts photos (without location data) and your text and voice notes are sent through our server to ${provider}, only to write a short caption for each step. We do not store them, and the provider does not use them to train models. The project name, the “before” cover photo and your account are not sent. Up to ${cfg.aiDailyLimit} hint requests per day. You can turn hints off in Settings or for a single project. Without consent or without internet, reassembly works from your photos as usual.</p>`,
+          a: `<p>An optional feature that stays off until you turn it on. Before the first use the app asks for your consent and names the AI provider. Then reduced copies of your step and parts photos (without location data) and your text and voice notes are sent through our server to ${provider}, only to write a short caption for each step. We do not store them, and the provider does not use them to train models. The project name, the “before” cover photo and your account are not sent. Our server also receives your random installation ID to apply the daily limit and account for costs; it is not passed to the AI provider. Up to ${cfg.aiDailyLimit} hint requests per day. You can turn hints off in Settings or for a single project. Without consent or without internet, reassembly works from your photos as usual.</p>`,
         },
         {
           q: 'Is it safe to repair things with this app?',
@@ -129,7 +129,7 @@ export default (cfg) => {
         {
           h: 'Anonymous usage statistics',
           body: `<p>To see whether the app is useful, it sends a small set of events, for example “project created”, “step captured”, “reassembly started” or “export finished”. Events contain only numbers, yes/no values and fixed options (such as the number of steps or how long saving a step took), plus a random installation ID, a random session ID, the platform (iOS or Android), app version and interface language.</p>
-<p>Events never contain photos, audio, notes, project names, file paths, your email or account ID, or a device model. They are stored in our own database at Supabase and are not linked to your account. Raw events are deleted after ${cfg.analyticsRawRetentionDays} days; after that only totals remain. Statistics are on by default; you can turn them off any time in Settings, and then nothing is sent. Legal basis: our legitimate interest in improving the app (GDPR Art. 6(1)(f)).</p>`,
+<p>Events never contain photos, audio, notes, project names, file paths, your email or account ID, or a device model. They are stored in our own database at Supabase. If you sign in, the same random installation ID is also kept with your account in the free-teardown records (see “Account and free teardowns”), so events from that installation can technically be linked to your account. We use events only to see how the app is used, never to track you or for advertising. Raw events are deleted after ${cfg.analyticsRawRetentionDays} days; after that only totals remain. Statistics are on by default; you can turn them off any time in Settings, and then nothing is sent. Legal basis: our legitimate interest in improving the app (GDPR Art. 6(1)(f)).</p>`,
         },
         {
           h: 'Feedback you send',
@@ -138,11 +138,11 @@ export default (cfg) => {
         {
           h: 'Account and free teardowns',
           body: `<p>Your first teardown works without an account. To count it, the app sends a random installation ID and a random project ID to our server when you start a new teardown. To start more free teardowns, you sign in for free with email, Google or Apple. Email sign-in uses a one-time code and link, without a password; the sign-in emails are sent through Gmail SMTP (Google). With Google or Apple sign-in, the provider confirms your identity; we do not receive your Google or Apple password.</p>
-<p>We store only: your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID, used only to run your account and count your free teardowns; and, for each project you start, a random project ID and a random installation ID — never the project name, photos, notes or audio. If you sign in with Apple, we keep Apple’s refresh token only to revoke it when you delete the account. This data is stored at Supabase, which processes it on our behalf (data processor). Legal basis: providing the service you asked for (GDPR Art. 6(1)(b)).</p>`,
+<p>We store only: your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID, used only to run your account and count your free teardowns; and, for each project you start, a random project ID and a random installation ID, plus your account ID if you are signed in — never the project name, photos, notes or audio. If you sign in with Apple, we keep Apple’s refresh token only to revoke it when you delete the account. This data is stored at Supabase, which processes it on our behalf (data processor). Legal basis: providing the service you asked for (GDPR Art. 6(1)(b)).</p>`,
         },
         {
           h: 'Reassembly hints (optional)',
-          body: `<p>Hints are off until you turn them on and agree on a consent screen that names the AI provider. With your consent, when hints are written for a project, the app sends reduced copies (about 1024 px, without location or other EXIF data) of that project’s step and parts photos and your text and voice notes — voice notes as audio if the provider accepts audio, otherwise only the text notes — through our server function at Supabase to ${provider}, only to write the hints. The project name, the “before” cover photo and your account are not sent.</p>
+          body: `<p>Hints are off until you turn them on and agree on a consent screen that names the AI provider. With your consent, when hints are written for a project, the app sends reduced copies (about 1024 px, without location or other EXIF data) of that project’s step and parts photos and your text and voice notes — voice notes as audio if the provider accepts audio, otherwise only the text notes — through our server function at Supabase to ${provider}, only to write the hints. The project name, the “before” cover photo and your account are not sent. The request to our server also carries the random installation ID (see below); our server calls the provider, and the provider receives only the photos and notes, not the installation ID.</p>
 <p>Our server does not save the photos, audio or notes and does not log them. We keep only technical accounting — the random installation ID, the number of requests and photos, tokens, cost, response time and status — to apply a limit of ${cfg.aiDailyLimit} requests per day and to control costs; it is kept for up to 400 days. The provider processes the data under its paid API terms only to return the hints and does not use it to train models; it may keep it for a short period for abuse monitoring. The provider may process data outside the EU (for example in the United States) under standard contractual clauses or an adequacy decision. The hints are stored on your phone only. Legal basis: your consent (GDPR Art. 6(1)(a)). You can withdraw it at any time by turning hints off in Settings, and you can also turn them off for a single project.</p>`,
         },
         {
@@ -155,7 +155,7 @@ export default (cfg) => {
         },
         {
           h: 'Retention and deletion',
-          body: `<p>Account data is kept while the account exists. Raw usage events: ${cfg.analyticsRawRetentionDays} days. Technical accounting for reassembly hints: up to 400 days. Feedback: as long as needed to handle it, at most 2 years. You can delete your account in the app (Settings → Account → Delete account) or <a href="../account-deletion/">by email</a>. Deleting the account removes the account, your email address, the sign-in provider ID and the stored Apple token, after access is revoked with Apple. An anonymous count of teardowns started on the device (the random installation ID and random project IDs, with no link to you) is kept, so the free limit cannot be reset by creating a new account. Anonymous statistics are not linked to the account, so they are not affected. Backups at our providers may keep data for a limited time.</p>`,
+          body: `<p>Account data is kept while the account exists. Raw usage events: ${cfg.analyticsRawRetentionDays} days. Technical accounting for reassembly hints: up to 400 days. Feedback: as long as needed to handle it, at most 2 years. You can delete your account in the app (Settings → Account → Delete account) or <a href="../account-deletion/">by email</a>. Deleting the account removes the account, your email address, the sign-in provider ID and the stored Apple token, after access is revoked with Apple. The link between your account and the teardowns you started is removed; an anonymous count of teardowns started on the device (the random installation ID and random project IDs) is kept, so the free limit cannot be reset by creating a new account. Anonymous statistics are not deleted with the account; they contain no account ID, and once the account link is removed they can no longer be connected to the account through the free-teardown records. Backups at our providers may keep data for a limited time.</p>`,
         },
         {
           h: 'Your rights',
@@ -191,11 +191,11 @@ export default (cfg) => {
         },
         {
           h: 'What is deleted',
-          body: `<ul><li>Your account.</li><li>Your email address.</li><li>The user ID from your sign-in provider (email, Google or Apple).</li><li>The stored Sign in with Apple token, after access is revoked with Apple.</li></ul>`,
+          body: `<ul><li>Your account.</li><li>Your email address.</li><li>The user ID from your sign-in provider (email, Google or Apple).</li><li>The stored Sign in with Apple token, after access is revoked with Apple.</li><li>The link between your account and the teardowns you started.</li></ul>`,
         },
         {
           h: 'What stays',
-          body: `<ul><li>An anonymous count of teardowns started on your device — a random installation ID and random project IDs, with no link to you — so the free limit cannot be reset by creating a new account.</li><li>Anonymous usage statistics — they are not linked to the account and are kept for ${cfg.analyticsRawRetentionDays} days.</li><li>Your projects and photos — they were never on our server and stay on your phone until you delete them in the app or uninstall it.</li></ul><p>Provider backups may keep data for a limited time.</p>`,
+          body: `<ul><li>An anonymous count of teardowns started on your device — a random installation ID and random project IDs, no longer linked to your account — so the free limit cannot be reset by creating a new account.</li><li>Anonymous usage statistics — they contain the random installation ID but not your account, and are kept for ${cfg.analyticsRawRetentionDays} days.</li><li>Your projects and photos — they were never on our server and stay on your phone until you delete them in the app or uninstall it.</li></ul><p>Provider backups may keep data for a limited time.</p>`,
         },
       ],
     },
