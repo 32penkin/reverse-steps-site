@@ -1,7 +1,6 @@
 // English (source language). Other languages follow the same keys.
 // Strings marked "html" may contain inline tags; everything else is escaped by build.mjs.
 export default (cfg) => {
-  const after = cfg.quota.total - cfg.quota.withoutAccount;
   const provider = cfg.aiProvider
     ? `${cfg.aiProvider}`
     : 'the AI provider named on the consent screen in the app';
@@ -31,7 +30,7 @@ export default (cfg) => {
       iosLive: 'Download on the App Store',
       androidLive: 'Get it on Google Play',
       soon: 'soon',
-      storesNote: `Free, no ads. Your first teardown needs no account; after a free sign-in you get ${after} more. Photos stay on your phone.`,
+      storesNote: `Free, no ads. Sign in for free (email code, Google or Apple) and get ${cfg.quota.total} free teardowns. Photos stay on your phone.`,
       illustrationAlt: 'Four teardown photos taken in order 1 to 4, then shown again in order 4 to 1 for reassembly.',
       illustrationTop: 'Taking apart',
       illustrationArrow: 'Putting back: 4 → 1',
@@ -83,11 +82,11 @@ export default (cfg) => {
         },
         {
           q: 'How many free teardowns do I get?',
-          a: `<p>Right now: ${cfg.quota.total} in total. The first one needs no account; after a free sign-in you get ${after} more. You can sign in with email (a one-time code and link, no password), Google or Apple. The check happens only when you start a new teardown — a project you have started is never locked, including reassembly, export and hints. The numbers may change during the beta.</p>`,
+          a: `<p>Right now: ${cfg.quota.total} per account. A free sign-in is needed to use the app, and your first sign-in creates the account. You can sign in with email (a one-time code and link, no password), Google or Apple. The check happens only when you start a new teardown — a project you have started is never locked, including reassembly, export and hints. The numbers may change during the beta.</p>`,
         },
         {
           q: 'Why do I need to sign in at all?',
-          a: `<p>Only to keep count of free teardowns. The account stores your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID. Started teardowns are counted with a random project ID, a random installation ID and, once you are signed in, your account — no photos, project names, notes or audio.</p>`,
+          a: `<p>Sign-in is required to use the app, and the account is used only to keep count of free teardowns. The account stores your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID. Started teardowns are counted with a random project ID, a random installation ID and your account — no photos, project names, notes or audio.</p>`,
         },
         {
           q: 'What are reassembly hints and what is sent?',
@@ -129,7 +128,7 @@ export default (cfg) => {
         {
           h: 'Anonymous usage statistics',
           body: `<p>To see whether the app is useful, it sends a small set of events, for example “project created”, “step captured”, “reassembly started” or “export finished”. Events contain only numbers, yes/no values and fixed options (such as the number of steps or how long saving a step took), plus a random installation ID, a random session ID, the platform (iOS or Android), app version and interface language.</p>
-<p>Events never contain photos, audio, notes, project names, file paths, your email or account ID, or a device model. They are stored in our own database at Supabase. If you sign in, the same random installation ID is also kept with your account in the free-teardown records (see “Account and free teardowns”), so events from that installation can technically be linked to your account. We use events only to see how the app is used, never to track you or for advertising. Raw events are deleted after ${cfg.analyticsRawRetentionDays} days; after that only totals remain. Statistics are on by default; you can turn them off any time in Settings, and then nothing is sent. Legal basis: our legitimate interest in improving the app (GDPR Art. 6(1)(f)).</p>`,
+<p>Events never contain photos, audio, notes, project names, file paths, your email or account ID, or a device model. They are stored in our own database at Supabase. Because the app requires sign-in, the same random installation ID is also kept with your account in the free-teardown records (see “Account and free teardowns”), so events from that installation can technically be linked to your account. We use events only to see how the app is used, never to track you or for advertising. Raw events are deleted after ${cfg.analyticsRawRetentionDays} days; after that only totals remain. Statistics are on by default; you can turn them off any time in Settings, and then nothing is sent. Legal basis: our legitimate interest in improving the app (GDPR Art. 6(1)(f)).</p>`,
         },
         {
           h: 'Feedback you send',
@@ -137,8 +136,8 @@ export default (cfg) => {
         },
         {
           h: 'Account and free teardowns',
-          body: `<p>Your first teardown works without an account. To count it, the app sends a random installation ID and a random project ID to our server when you start a new teardown. To start more free teardowns, you sign in for free with email, Google or Apple. Email sign-in uses a one-time code and link, without a password; the sign-in emails are sent through Gmail SMTP (Google). With Google or Apple sign-in, the provider confirms your identity; we do not receive your Google or Apple password.</p>
-<p>We store only: your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID, used only to run your account and count your free teardowns; and, for each project you start, a random project ID and a random installation ID, plus your account ID if you are signed in — never the project name, photos, notes or audio. If you sign in with Apple, we keep Apple’s refresh token only to revoke it when you delete the account. This data is stored at Supabase, which processes it on our behalf (data processor). Legal basis: providing the service you asked for (GDPR Art. 6(1)(b)).</p>`,
+          body: `<p>An account is required to use the app. After the introduction screens, you sign in for free with email, Google or Apple; your first sign-in creates the account. Each account gets ${cfg.quota.total} free teardowns. To count them, the app sends a random installation ID, a random project ID and your account ID to our server when you start a new teardown. Email sign-in uses a one-time code and link, without a password; the sign-in emails are sent through Gmail SMTP (Google). With Google or Apple sign-in, the provider confirms your identity; we do not receive your Google or Apple password.</p>
+<p>We store only: your email address (with Apple it may be a private relay address) and the sign-in provider’s user ID, used only to run your account and count your free teardowns; and, for each project you start, a random project ID and a random installation ID, plus your account ID — never the project name, photos, notes or audio. If you sign in with Apple, we keep Apple’s refresh token only to revoke it when you delete the account. This data is stored at Supabase, which processes it on our behalf (data processor). Legal basis: providing the service you asked for (GDPR Art. 6(1)(b)).</p>`,
         },
         {
           h: 'Reassembly hints (optional)',

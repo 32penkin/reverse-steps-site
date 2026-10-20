@@ -1,7 +1,7 @@
 {
   "_help": "Facts the pages depend on. Change here, run `node build.mjs`, commit public/. null = not decided / not available yet; the pages then use neutral wording and disabled buttons. playTesting: set to https://play.google.com/apps/testing/com.reversesteps.app once A7 has the Play closed test running; testflight: the public TestFlight link.",
   "baseUrl": "https://32penkin.github.io/reverse-steps-site",
-  "lastUpdated": "2026-10-16",
+  "lastUpdated": "2026-10-20",
   "contactEmail": "penkin.yauhen@gmail.com",
   "developer": "Yauhen Penkin",
   "developerCountry": {
@@ -21,8 +21,7 @@
     "appStoreProviderToken": null
   },
   "quota": {
-    "total": 5,
-    "withoutAccount": 1
+    "total": 5
   },
   "aiProvider": null,
   "aiDailyLimit": 5,
