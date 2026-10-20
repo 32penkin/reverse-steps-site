@@ -1,6 +1,5 @@
 // Español (neutro). Claves como en en.mjs.
 export default (cfg) => {
-  const after = cfg.quota.total - cfg.quota.withoutAccount;
   const provider = cfg.aiProvider
     ? `${cfg.aiProvider}`
     : 'el proveedor de IA indicado en la pantalla de consentimiento de la app';
@@ -30,7 +29,7 @@ export default (cfg) => {
       iosLive: 'Descargar en el App Store',
       androidLive: 'Disponible en Google Play',
       soon: 'pronto',
-      storesNote: `Gratis y sin anuncios. Tu primer desmontaje no necesita cuenta; al iniciar sesión gratis tienes ${after} más. Las fotos se quedan en tu teléfono.`,
+      storesNote: `Gratis y sin anuncios. Inicia sesión gratis (código por email, Google o Apple) y tienes ${cfg.quota.total} desmontajes gratuitos. Las fotos se quedan en tu teléfono.`,
       illustrationAlt: 'Cuatro fotos de un desmontaje tomadas en orden del 1 al 4 y luego mostradas de nuevo del 4 al 1 para el montaje.',
       illustrationTop: 'Desarmar',
       illustrationArrow: 'Volver a armar: 4 → 1',
@@ -82,11 +81,11 @@ export default (cfg) => {
         },
         {
           q: '¿Cuántos desmontajes gratuitos tengo?',
-          a: `<p>Por ahora, ${cfg.quota.total} en total. El primero no necesita cuenta; al iniciar sesión gratis tienes ${after} más. Puedes iniciar sesión con email (un código de un solo uso y un enlace, sin contraseña), con Google o con Apple. La comprobación se hace solo al empezar un desmontaje nuevo: un proyecto ya empezado nunca se bloquea, incluido el montaje, la exportación y las sugerencias. Las cifras pueden cambiar durante la beta.</p>`,
+          a: `<p>Por ahora, ${cfg.quota.total} por cuenta. Para usar la app necesitas iniciar sesión gratis; la primera vez que inicias sesión se crea la cuenta. Puedes iniciar sesión con email (un código de un solo uso y un enlace, sin contraseña), con Google o con Apple. La comprobación se hace solo al empezar un desmontaje nuevo: un proyecto ya empezado nunca se bloquea, incluido el montaje, la exportación y las sugerencias. Las cifras pueden cambiar durante la beta.</p>`,
         },
         {
           q: '¿Por qué tengo que iniciar sesión?',
-          a: `<p>Solo para llevar la cuenta de los desmontajes gratuitos. La cuenta guarda tu dirección de email (con Apple puede ser una dirección de reenvío privada) y el ID de usuario de tu proveedor de inicio de sesión. Los desmontajes empezados se cuentan con un ID aleatorio de proyecto, un ID aleatorio de instalación y, cuando has iniciado sesión, tu cuenta; nada de fotos, nombres de proyectos, notas ni audio.</p>`,
+          a: `<p>Iniciar sesión es necesario para usar la app, y la cuenta solo sirve para contar los desmontajes gratuitos. La cuenta guarda tu dirección de email (con Apple puede ser una dirección de reenvío privada) y el ID de usuario de tu proveedor de inicio de sesión. Los desmontajes empezados se cuentan con un ID aleatorio de proyecto, un ID aleatorio de instalación y tu cuenta; nada de fotos, nombres de proyectos, notas ni audio.</p>`,
         },
         {
           q: '¿Qué son las sugerencias de montaje y qué se envía?',
@@ -128,7 +127,7 @@ export default (cfg) => {
         {
           h: 'Estadísticas de uso anónimas',
           body: `<p>Para saber si la app resulta útil, envía un pequeño conjunto de eventos, por ejemplo «proyecto creado», «paso capturado», «montaje iniciado» o «exportación terminada». Los eventos contienen solo números, valores sí/no y opciones fijas (como el número de pasos o cuánto tardó en guardarse un paso), además de un ID aleatorio de instalación, un ID aleatorio de sesión, la plataforma (iOS o Android), la versión de la app y el idioma de la interfaz.</p>
-<p>Los eventos nunca contienen fotos, audio, notas, nombres de proyectos, rutas de archivos, tu email ni el ID de tu cuenta, ni el modelo del dispositivo. Se guardan en nuestra propia base de datos en Supabase. Si inicias sesión, el mismo ID aleatorio de instalación también se guarda con tu cuenta en el registro de desmontajes gratuitos (consulta «Cuenta y desmontajes gratuitos»), así que los eventos de esa instalación pueden vincularse técnicamente a tu cuenta. Usamos los eventos solo para ver cómo se usa la app, nunca para hacerte seguimiento ni para publicidad. Los eventos sin procesar se eliminan a los ${cfg.analyticsRawRetentionDays} días; después solo quedan totales. Las estadísticas están activadas por defecto; puedes desactivarlas en cualquier momento en Ajustes y entonces no se envía nada. Base jurídica: nuestro interés legítimo en mejorar la app (art. 6.1.f del RGPD).</p>`,
+<p>Los eventos nunca contienen fotos, audio, notas, nombres de proyectos, rutas de archivos, tu email ni el ID de tu cuenta, ni el modelo del dispositivo. Se guardan en nuestra propia base de datos en Supabase. Como la app requiere iniciar sesión, el mismo ID aleatorio de instalación también se guarda con tu cuenta en el registro de desmontajes gratuitos (consulta «Cuenta y desmontajes gratuitos»), así que los eventos de esa instalación pueden vincularse técnicamente a tu cuenta. Usamos los eventos solo para ver cómo se usa la app, nunca para hacerte seguimiento ni para publicidad. Los eventos sin procesar se eliminan a los ${cfg.analyticsRawRetentionDays} días; después solo quedan totales. Las estadísticas están activadas por defecto; puedes desactivarlas en cualquier momento en Ajustes y entonces no se envía nada. Base jurídica: nuestro interés legítimo en mejorar la app (art. 6.1.f del RGPD).</p>`,
         },
         {
           h: 'Comentarios que envías',
@@ -136,8 +135,8 @@ export default (cfg) => {
         },
         {
           h: 'Cuenta y desmontajes gratuitos',
-          body: `<p>Tu primer desmontaje funciona sin cuenta. Para contarlo, la app envía a nuestro servidor un ID aleatorio de instalación y un ID aleatorio de proyecto cuando empiezas un desmontaje nuevo. Para empezar más desmontajes gratuitos, inicias sesión gratis con email, Google o Apple. El inicio de sesión con email usa un código de un solo uso y un enlace, sin contraseña; los emails de inicio de sesión se envían a través de Gmail SMTP (Google). Si inicias sesión con Google o Apple, el proveedor confirma tu identidad; no recibimos tu contraseña de Google ni de Apple.</p>
-<p>Solo guardamos: tu dirección de email (con Apple puede ser una dirección de reenvío privada) y el ID de usuario de tu proveedor de inicio de sesión, que usamos solo para gestionar tu cuenta y contar tus desmontajes gratuitos; y, por cada proyecto que empiezas, un ID aleatorio de proyecto y un ID aleatorio de instalación, además del ID de tu cuenta si has iniciado sesión. Nunca el nombre del proyecto, fotos, notas ni audio. Si inicias sesión con Apple, guardamos el token de actualización de Apple solo para revocarlo cuando elimines la cuenta. Estos datos se almacenan en Supabase, que los trata por cuenta nuestra (encargado del tratamiento). Base jurídica: la prestación del servicio que has solicitado (art. 6.1.b del RGPD).</p>`,
+          body: `<p>Para usar la app necesitas una cuenta. Después de las pantallas de bienvenida, inicias sesión gratis con email, Google o Apple; la primera vez que inicias sesión se crea la cuenta. Cada cuenta tiene ${cfg.quota.total} desmontajes gratuitos. Para contarlos, la app envía a nuestro servidor un ID aleatorio de instalación, un ID aleatorio de proyecto y el ID de tu cuenta cuando empiezas un desmontaje nuevo. El inicio de sesión con email usa un código de un solo uso y un enlace, sin contraseña; los emails de inicio de sesión se envían a través de Gmail SMTP (Google). Si inicias sesión con Google o Apple, el proveedor confirma tu identidad; no recibimos tu contraseña de Google ni de Apple.</p>
+<p>Solo guardamos: tu dirección de email (con Apple puede ser una dirección de reenvío privada) y el ID de usuario de tu proveedor de inicio de sesión, que usamos solo para gestionar tu cuenta y contar tus desmontajes gratuitos; y, por cada proyecto que empiezas, un ID aleatorio de proyecto y un ID aleatorio de instalación, además del ID de tu cuenta. Nunca el nombre del proyecto, fotos, notas ni audio. Si inicias sesión con Apple, guardamos el token de actualización de Apple solo para revocarlo cuando elimines la cuenta. Estos datos se almacenan en Supabase, que los trata por cuenta nuestra (encargado del tratamiento). Base jurídica: la prestación del servicio que has solicitado (art. 6.1.b del RGPD).</p>`,
         },
         {
           h: 'Sugerencias de montaje (opcional)',

@@ -1,7 +1,6 @@
 // Français (France). Clés identiques à en.mjs.
 // Strings marked "html" may contain inline tags; everything else is escaped by build.mjs.
 export default (cfg) => {
-  const after = cfg.quota.total - cfg.quota.withoutAccount;
   const provider = cfg.aiProvider
     ? `${cfg.aiProvider}`
     : 'le fournisseur d’IA indiqué dans l’application sur l’écran de consentement';
@@ -31,7 +30,7 @@ export default (cfg) => {
       iosLive: 'Télécharger dans l’App Store',
       androidLive: 'Disponible sur Google Play',
       soon: 'bientôt',
-      storesNote: `Gratuit, sans publicité. Votre premier démontage ne demande pas de compte ; après une connexion gratuite, vous en avez ${after} de plus. Les photos restent sur votre téléphone.`,
+      storesNote: `Gratuit, sans publicité. Après une connexion gratuite (code par e-mail, Google ou Apple), vous avez ${cfg.quota.total} démontages gratuits. Les photos restent sur votre téléphone.`,
       illustrationAlt: 'Quatre photos de démontage prises dans l’ordre de 1 à 4, puis affichées de nouveau de 4 à 1 pour le remontage.',
       illustrationTop: 'Démontage',
       illustrationArrow: 'Remontage : 4 → 1',
@@ -83,11 +82,11 @@ export default (cfg) => {
         },
         {
           q: 'Combien de démontages gratuits ai-je ?',
-          a: `<p>Pour l’instant : ${cfg.quota.total} au total. Le premier ne demande pas de compte ; après une connexion gratuite, vous en avez ${after} de plus. Vous pouvez vous connecter par e-mail (un code à usage unique et un lien, sans mot de passe), avec Google ou avec Apple. La vérification n’a lieu qu’au lancement d’un nouveau démontage — un projet commencé n’est jamais bloqué, y compris le remontage, l’export et les conseils. Ces chiffres peuvent changer pendant la bêta.</p>`,
+          a: `<p>Pour l’instant : ${cfg.quota.total} par compte. Une connexion gratuite est nécessaire pour utiliser l’application ; votre première connexion crée le compte. Vous pouvez vous connecter par e-mail (un code à usage unique et un lien, sans mot de passe), avec Google ou avec Apple. La vérification n’a lieu qu’au lancement d’un nouveau démontage — un projet commencé n’est jamais bloqué, y compris le remontage, l’export et les conseils. Ces chiffres peuvent changer pendant la bêta.</p>`,
         },
         {
           q: 'Pourquoi faut-il se connecter ?',
-          a: `<p>Uniquement pour compter les démontages gratuits. Le compte conserve votre adresse e-mail (avec Apple, il peut s’agir d’une adresse relais privée) et l’identifiant utilisateur de votre fournisseur de connexion. Les démontages commencés sont comptés avec un identifiant de projet aléatoire, un identifiant d’installation aléatoire et, une fois connecté, votre compte — aucune photo, aucun nom de projet, aucune note ni aucun audio.</p>`,
+          a: `<p>La connexion est nécessaire pour utiliser l’application, et le compte sert uniquement à compter les démontages gratuits. Le compte conserve votre adresse e-mail (avec Apple, il peut s’agir d’une adresse relais privée) et l’identifiant utilisateur de votre fournisseur de connexion. Les démontages commencés sont comptés avec un identifiant de projet aléatoire, un identifiant d’installation aléatoire et votre compte — aucune photo, aucun nom de projet, aucune note ni aucun audio.</p>`,
         },
         {
           q: 'Que sont les conseils de remontage et qu’est-ce qui est envoyé ?',
@@ -129,7 +128,7 @@ export default (cfg) => {
         {
           h: 'Statistiques d’utilisation anonymes',
           body: `<p>Pour savoir si l’application est utile, elle envoie un petit ensemble d’événements, par exemple « projet créé », « étape enregistrée », « remontage commencé » ou « export terminé ». Les événements ne contiennent que des nombres, des valeurs oui/non et des options fixes (comme le nombre d’étapes ou le temps d’enregistrement d’une étape), ainsi qu’un identifiant d’installation aléatoire, un identifiant de session aléatoire, la plateforme (iOS ou Android), la version de l’application et la langue de l’interface.</p>
-<p>Les événements ne contiennent jamais de photos, d’audio, de notes, de noms de projets, de chemins de fichiers, votre adresse e-mail ou identifiant de compte, ni le modèle de l’appareil. Ils sont stockés dans notre propre base de données chez Supabase. Si vous vous connectez, le même identifiant d’installation aléatoire est aussi conservé avec votre compte dans les enregistrements des démontages gratuits (voir « Compte et démontages gratuits »), de sorte que les événements de cette installation peuvent techniquement être liés à votre compte. Nous utilisons les événements uniquement pour voir comment l’application est utilisée, jamais pour vous suivre ni à des fins publicitaires. Les événements bruts sont supprimés après ${cfg.analyticsRawRetentionDays} jours ; seuls des totaux restent ensuite. Les statistiques sont activées par défaut ; vous pouvez les désactiver à tout moment dans les Réglages, et rien n’est alors envoyé. Base légale : notre intérêt légitime à améliorer l’application (art. 6, par. 1, point f) du RGPD).</p>`,
+<p>Les événements ne contiennent jamais de photos, d’audio, de notes, de noms de projets, de chemins de fichiers, votre adresse e-mail ou identifiant de compte, ni le modèle de l’appareil. Ils sont stockés dans notre propre base de données chez Supabase. Comme l’application exige une connexion, le même identifiant d’installation aléatoire est aussi conservé avec votre compte dans les enregistrements des démontages gratuits (voir « Compte et démontages gratuits »), de sorte que les événements de cette installation peuvent techniquement être liés à votre compte. Nous utilisons les événements uniquement pour voir comment l’application est utilisée, jamais pour vous suivre ni à des fins publicitaires. Les événements bruts sont supprimés après ${cfg.analyticsRawRetentionDays} jours ; seuls des totaux restent ensuite. Les statistiques sont activées par défaut ; vous pouvez les désactiver à tout moment dans les Réglages, et rien n’est alors envoyé. Base légale : notre intérêt légitime à améliorer l’application (art. 6, par. 1, point f) du RGPD).</p>`,
         },
         {
           h: 'Retours que vous envoyez',
@@ -137,8 +136,8 @@ export default (cfg) => {
         },
         {
           h: 'Compte et démontages gratuits',
-          body: `<p>Votre premier démontage fonctionne sans compte. Pour le comptabiliser, l’application envoie un identifiant d’installation aléatoire et un identifiant de projet aléatoire à notre serveur quand vous lancez un nouveau démontage. Pour lancer d’autres démontages gratuits, vous vous connectez gratuitement par e-mail, avec Google ou avec Apple. La connexion par e-mail utilise un code à usage unique et un lien, sans mot de passe ; les e-mails de connexion sont envoyés via Gmail SMTP (Google). Avec la connexion Google ou Apple, le fournisseur confirme votre identité ; nous ne recevons pas votre mot de passe Google ou Apple.</p>
-<p>Nous conservons uniquement : votre adresse e-mail (avec Apple, il peut s’agir d’une adresse relais privée) et l’identifiant utilisateur de votre fournisseur de connexion, utilisés uniquement pour gérer votre compte et compter vos démontages gratuits ; et, pour chaque projet commencé, un identifiant de projet aléatoire et un identifiant d’installation aléatoire, ainsi que l’identifiant de votre compte si vous êtes connecté — jamais le nom du projet, les photos, les notes ni l’audio. Si vous vous connectez avec Apple, nous conservons le jeton d’actualisation Apple uniquement pour le révoquer lors de la suppression du compte. Ces données sont stockées chez Supabase, qui les traite pour notre compte (sous-traitant). Base légale : la fourniture du service que vous avez demandé (art. 6, par. 1, point b) du RGPD).</p>`,
+          body: `<p>Un compte est nécessaire pour utiliser l’application. Après les écrans d’introduction, vous vous connectez gratuitement par e-mail, avec Google ou avec Apple ; votre première connexion crée le compte. Chaque compte dispose de ${cfg.quota.total} démontages gratuits. Pour les comptabiliser, l’application envoie un identifiant d’installation aléatoire, un identifiant de projet aléatoire et l’identifiant de votre compte à notre serveur quand vous lancez un nouveau démontage. La connexion par e-mail utilise un code à usage unique et un lien, sans mot de passe ; les e-mails de connexion sont envoyés via Gmail SMTP (Google). Avec la connexion Google ou Apple, le fournisseur confirme votre identité ; nous ne recevons pas votre mot de passe Google ou Apple.</p>
+<p>Nous conservons uniquement : votre adresse e-mail (avec Apple, il peut s’agir d’une adresse relais privée) et l’identifiant utilisateur de votre fournisseur de connexion, utilisés uniquement pour gérer votre compte et compter vos démontages gratuits ; et, pour chaque projet commencé, un identifiant de projet aléatoire et un identifiant d’installation aléatoire, ainsi que l’identifiant de votre compte — jamais le nom du projet, les photos, les notes ni l’audio. Si vous vous connectez avec Apple, nous conservons le jeton d’actualisation Apple uniquement pour le révoquer lors de la suppression du compte. Ces données sont stockées chez Supabase, qui les traite pour notre compte (sous-traitant). Base légale : la fourniture du service que vous avez demandé (art. 6, par. 1, point b) du RGPD).</p>`,
         },
         {
           h: 'Conseils de remontage (facultatifs)',
