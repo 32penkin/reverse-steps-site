@@ -12,12 +12,12 @@
     "fr": "Pologne",
     "es": "Polonia"
   },
-  "phase": "beta",
+  "phase": "live",
   "links": {
     "testflight": null,
     "playTesting": null,
     "playPackage": "com.reversesteps.app",
-    "appStoreId": null,
+    "appStoreId": "6823595867",
     "appStoreProviderToken": null
   },
   "quota": {
